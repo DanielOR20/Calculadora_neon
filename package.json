@@ -1,0 +1,25 @@
+{
+  "name": "laboratorio-github-daniel",
+  "version": "1.0.0",
+  "description": "Calculadora interactiva con estética cyberpunk/neón, construida con HTML, CSS y JavaScript vanilla.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielOR20/Calculadora_neon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DanielOR20/Calculadora_neon/issues"
+  },
+  "homepage": "https://github.com/DanielOR20/Calculadora_neon#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
