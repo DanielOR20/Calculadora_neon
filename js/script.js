@@ -62,3 +62,15 @@ function calculate() {
   previous = '';
   updateDisplay();
 }
+
+function clearAll() {
+  current = '0';
+  previous = '';
+  operator = null;
+  updateDisplay();
+}
+
+function deleteLast() {
+  current = current.length > 1 ? current.slice(0, -1) : '0';
+  updateDisplay();
+}
