@@ -23,3 +23,86 @@ body {
   font-family: 'Courier New', monospace;
   color: var(--text);
 }
+
+.calculator {
+  width: 320px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--panel);
+  border: 1px solid var(--neon-violet);
+  box-shadow: 0 0 20px var(--neon-violet), 0 0 40px rgba(157, 0, 255, 0.3);
+}
+
+.display {
+  margin-bottom: 16px;
+  text-align: right;
+  padding: 10px;
+}
+
+.history {
+  min-height: 20px;
+  font-size: 0.9rem;
+  color: var(--neon-cyan);
+  opacity: 0.7;
+}
+
+.current {
+  font-size: 2.2rem;
+  color: var(--text);
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  padding: 16px;
+  font-size: 1.1rem;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 0 12px var(--neon-cyan);
+}
+
+.btn-op {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+}
+
+.btn-op:hover {
+  box-shadow: 0 0 12px var(--neon-magenta);
+}
+
+.btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.btn-op:active {
+  box-shadow: 0 0 20px var(--neon-magenta);
+}
+
+.btn-equals {
+  grid-column: span 2;
+  background: var(--neon-violet);
+  border-color: var(--neon-violet);
+  color: #fff;
+}
+
+.btn-zero {
+  grid-column: span 2;
+}
+
+.btn-clear {
+  border-color: var(--error);
+  color: var(--error);
+}
