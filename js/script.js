@@ -24,6 +24,11 @@ function inputNumber(num) {
 updateDisplay();
 
 function chooseOperator(op) {
+  if (op === '%') {
+    current = (parseFloat(current) / 100).toString();
+    updateDisplay();
+    return;
+  }
   if (current === '0' && previous === '') return;
   if (previous !== '') {
     calculate();
@@ -92,3 +97,4 @@ document.querySelectorAll('.btn').forEach((btn) => {
     }
   });
 });
+
