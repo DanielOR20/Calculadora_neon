@@ -40,10 +40,16 @@ body {
 }
 
 .history {
-  min-height: 20px;
-  font-size: 0.9rem;
+  max-height: 90px;
+  overflow-y: auto;
+  font-size: 0.8rem;
   color: var(--neon-cyan);
   opacity: 0.7;
+}
+
+.history-item {
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(0, 255, 249, 0.15);
 }
 
 .current {
