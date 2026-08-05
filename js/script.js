@@ -48,13 +48,11 @@ function calculate() {
     case '+': result = prev + curr; break;
     case '-': result = prev - curr; break;
     case '*': result = prev * curr; break;
-    case '/':
-      if (curr === 0) {
-        current = 'Error';
-        updateDisplay();
-        setTimeout(clearAll, 1000);
-        return;
-      }
+   case '/':
+  if (curr === 0) {
+    triggerErrorGlitch();
+    return;
+  }
       result = prev / curr;
       break;
     case '%': result = prev % curr; break;
@@ -111,4 +109,14 @@ function renderHistoryLog() {
   historyEl.innerHTML = historyLog
     .map((item) => `<div class="history-item">${item}</div>`)
     .join('');
+}
+
+function triggerErrorGlitch() {
+  current = 'Error';
+  updateDisplay();
+  document.querySelector('.calculator').classList.add('glitch');
+  setTimeout(() => {
+    document.querySelector('.calculator').classList.remove('glitch');
+    clearAll();
+  }, 800);
 }
