@@ -120,3 +120,19 @@ function triggerErrorGlitch() {
     clearAll();
   }, 800);
 }
+
+document.addEventListener('keydown', (e) => {
+  const { key } = e;
+  if (/[0-9.]/.test(key)) {
+    inputNumber(key);
+  } else if (['+', '-', '*', '/'].includes(key)) {
+    chooseOperator(key);
+  } else if (key === 'Enter' || key === '=') {
+    e.preventDefault();
+    calculate();
+  } else if (key === 'Backspace') {
+    deleteLast();
+  } else if (key === 'Escape') {
+    clearAll();
+  }
+});
