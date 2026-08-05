@@ -82,6 +82,15 @@ body {
   box-shadow: 0 0 12px var(--neon-magenta);
 }
 
+.btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.btn-op:active {
+  box-shadow: 0 0 20px var(--neon-magenta);
+}
+
 .btn-equals {
   grid-column: span 2;
   background: var(--neon-violet);
