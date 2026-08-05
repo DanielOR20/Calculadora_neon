@@ -74,3 +74,21 @@ function deleteLast() {
   current = current.length > 1 ? current.slice(0, -1) : '0';
   updateDisplay();
 }
+
+document.querySelectorAll('.btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const { value, action } = btn.dataset;
+
+    if (action === 'clear') {
+      clearAll();
+    } else if (action === 'delete') {
+      deleteLast();
+    } else if (action === 'equals') {
+      calculate();
+    } else if (btn.classList.contains('btn-op')) {
+      chooseOperator(value);
+    } else if (value !== undefined) {
+      inputNumber(value);
+    }
+  });
+});
