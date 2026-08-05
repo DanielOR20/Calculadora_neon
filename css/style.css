@@ -1,0 +1,25 @@
+:root {
+  --bg: #0d0221;
+  --panel: #1a0533;
+  --neon-cyan: #00fff9;
+  --neon-magenta: #ff00e5;
+  --neon-violet: #9d00ff;
+  --text: #e6e6fa;
+  --error: #ff003c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-family: 'Courier New', monospace;
+  color: var(--text);
+}
