@@ -22,3 +22,43 @@ function inputNumber(num) {
 }
 
 updateDisplay();
+
+function chooseOperator(op) {
+  if (current === '0' && previous === '') return;
+  if (previous !== '') {
+    calculate();
+  }
+  operator = op;
+  previous = current;
+  current = '0';
+  updateDisplay();
+}
+
+function calculate() {
+  const prev = parseFloat(previous);
+  const curr = parseFloat(current);
+  if (isNaN(prev) || isNaN(curr) || operator === null) return;
+
+  let result;
+  switch (operator) {
+    case '+': result = prev + curr; break;
+    case '-': result = prev - curr; break;
+    case '*': result = prev * curr; break;
+    case '/':
+      if (curr === 0) {
+        current = 'Error';
+        updateDisplay();
+        setTimeout(clearAll, 1000);
+        return;
+      }
+      result = prev / curr;
+      break;
+    case '%': result = prev % curr; break;
+    default: return;
+  }
+
+  current = result.toString();
+  operator = null;
+  previous = '';
+  updateDisplay();
+}
