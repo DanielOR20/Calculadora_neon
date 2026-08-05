@@ -62,6 +62,8 @@ function calculate() {
     default: return;
   }
 
+  const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
+  saveToHistory(historyEntry);
   current = result.toString();
   operator = null;
   previous = '';
@@ -98,3 +100,16 @@ document.querySelectorAll('.btn').forEach((btn) => {
   });
 });
 
+let historyLog = [];
+
+function saveToHistory(entry) {
+  historyLog.unshift(entry);
+  if (historyLog.length > 5) historyLog.pop();
+  renderHistoryLog();
+}
+
+function renderHistoryLog() {
+  historyEl.innerHTML = historyLog
+    .map((item) => `<div class="history-item">${item}</div>`)
+    .join('');
+}
