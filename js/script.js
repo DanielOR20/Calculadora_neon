@@ -7,7 +7,6 @@ let operator = null;
 
 function updateDisplay() {
   currentEl.textContent = current;
-  historyEl.textContent = previous && operator ? `${previous} ${operator}` : '';
 }
 
 function inputNumber(num) {
