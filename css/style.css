@@ -112,3 +112,18 @@ body {
   border-color: var(--error);
   color: var(--error);
 }
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
+  40% { transform: translate(3px, -2px); filter: hue-rotate(-90deg); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+.calculator.glitch {
+  animation: glitch 0.3s linear 2;
+  border-color: var(--error);
+  box-shadow: 0 0 20px var(--error), 0 0 40px rgba(255, 0, 60, 0.4);
+}
