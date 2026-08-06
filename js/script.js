@@ -10,6 +10,7 @@ function updateDisplay() {
 }
 
 function inputNumber(num) {
+  if (current.replace('-', '').length >= 12) return;
   if (current === '0' && num !== '.') {
     current = num;
   } else if (num === '.' && current.includes('.')) {
