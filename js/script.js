@@ -7,12 +7,19 @@ const DECIMAL_PRECISION = 100000;
 let current = '0';
 let previous = '';
 let operator = null;
+let resetNext = false;
 
 function updateDisplay() {
   currentEl.textContent = current;
 }
 
 function inputNumber(num) {
+  if (resetNext) {
+    current = num === '.' ? '0.' : num;
+    resetNext = false;
+    updateDisplay();
+    return;
+  }
   if (current.replace('-', '').length >= MAX_DIGITS) return;
   if (current === '0' && num !== '.') {
     current = num;
@@ -23,8 +30,6 @@ function inputNumber(num) {
   }
   updateDisplay();
 }
-
-updateDisplay();
 
 /**
  * Define el operador activo. Si ya hay una operacion pendiente, la resuelve
@@ -38,12 +43,12 @@ function chooseOperator(op) {
     return;
   }
   if (current === '0' && previous === '') return;
-  if (previous !== '') {
+  if (previous !== '' && !resetNext) {
     calculate();
   }
   operator = op;
   previous = current;
-  current = '0';
+  resetNext = true;
   updateDisplay();
 }
 
