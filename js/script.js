@@ -23,6 +23,11 @@ function inputNumber(num) {
 
 updateDisplay();
 
+/**
+ * Define el operador activo. Si ya hay una operacion pendiente, la resuelve
+ * primero (encadenado). El operador % es una excepcion: actua al instante.
+ */
+
 function chooseOperator(op) {
   if (op === '%') {
     current = (parseFloat(current) / 100).toString();
@@ -38,6 +43,11 @@ function chooseOperator(op) {
   current = '0';
   updateDisplay();
 }
+
+/**
+ * Ejecuta la operacion pendiente usando `previous`, `operator` y `current`.
+ * Redondea el resultado y lo guarda en el historial.
+ */
 
 function calculate() {
   const prev = parseFloat(previous);
