@@ -59,6 +59,8 @@ function calculate() {
     default: return;
   }
 
+  result = Math.round(result * 100000) / 100000;
+
   const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
   saveToHistory(historyEntry);
   current = result.toString();
