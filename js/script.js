@@ -76,7 +76,10 @@ function calculate() {
   result = Math.round(result * DECIMAL_PRECISION) / DECIMAL_PRECISION
 
   const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
-  (historyLog.length > MAX_HISTORY_ITEMS)
+  if (historyLog.length > MAX_HISTORY_ITEMS) {
+    historyLog.pop();
+  }
+  historyLog.unshift(historyEntry);
   current = result.toString();
   operator = null;
   previous = '';
