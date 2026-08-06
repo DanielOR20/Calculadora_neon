@@ -87,6 +87,8 @@ function clearAll() {
   current = '0';
   previous = '';
   operator = null;
+  historyLog = [];
+  renderHistoryLog();
   updateDisplay();
 }
 
