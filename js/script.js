@@ -1,5 +1,8 @@
 const currentEl = document.getElementById('current');
 const historyEl = document.getElementById('history');
+const MAX_DIGITS = 12;
+const MAX_HISTORY_ITEMS = 5;
+const DECIMAL_PRECISION = 100000;
 
 let current = '0';
 let previous = '';
@@ -10,7 +13,7 @@ function updateDisplay() {
 }
 
 function inputNumber(num) {
-  if (current.replace('-', '').length >= 12) return;
+  if (current.replace('-', '').length >= MAX_DIGITS) return;
   if (current === '0' && num !== '.') {
     current = num;
   } else if (num === '.' && current.includes('.')) {
@@ -70,10 +73,10 @@ function calculate() {
     default: return;
   }
 
-  result = Math.round(result * 100000) / 100000;
+  result = Math.round(result * DECIMAL_PRECISION) / DECIMAL_PRECISION
 
   const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
-  saveToHistory(historyEntry);
+  (historyLog.length > MAX_HISTORY_ITEMS)
   current = result.toString();
   operator = null;
   previous = '';
