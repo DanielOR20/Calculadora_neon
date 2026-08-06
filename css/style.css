@@ -159,7 +159,7 @@ body {
 }
 
 .calc-title {
-  text-align: right;
+  text-align: left;
   font-size: 0.85rem;
   letter-spacing: 2px;
   text-transform: uppercase;
