@@ -1,16 +1,26 @@
 const currentEl = document.getElementById('current');
 const historyEl = document.getElementById('history');
+const MAX_DIGITS = 12;
+const MAX_HISTORY_ITEMS = 5;
+const DECIMAL_PRECISION = 100000;
 
 let current = '0';
 let previous = '';
 let operator = null;
+let resetNext = false;
 
 function updateDisplay() {
   currentEl.textContent = current;
 }
 
 function inputNumber(num) {
-  if (current.replace('-', '').length >= 12) return;
+  if (resetNext) {
+    current = num === '.' ? '0.' : num;
+    resetNext = false;
+    updateDisplay();
+    return;
+  }
+  if (current.replace('-', '').length >= MAX_DIGITS) return;
   if (current === '0' && num !== '.') {
     current = num;
   } else if (num === '.' && current.includes('.')) {
@@ -20,8 +30,6 @@ function inputNumber(num) {
   }
   updateDisplay();
 }
-
-updateDisplay();
 
 /**
  * Define el operador activo. Si ya hay una operacion pendiente, la resuelve
@@ -35,12 +43,12 @@ function chooseOperator(op) {
     return;
   }
   if (current === '0' && previous === '') return;
-  if (previous !== '') {
+  if (previous !== '' && !resetNext) {
     calculate();
   }
   operator = op;
   previous = current;
-  current = '0';
+  resetNext = true;
   updateDisplay();
 }
 
@@ -70,9 +78,9 @@ function calculate() {
     default: return;
   }
 
-  result = Math.round(result * 100000) / 100000;
+  result = Math.round(result * DECIMAL_PRECISION) / DECIMAL_PRECISION
 
-  const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
+ const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
   saveToHistory(historyEntry);
   current = result.toString();
   operator = null;
@@ -84,6 +92,8 @@ function clearAll() {
   current = '0';
   previous = '';
   operator = null;
+  historyLog = [];
+  renderHistoryLog();
   updateDisplay();
 }
 
@@ -114,7 +124,7 @@ let historyLog = [];
 
 function saveToHistory(entry) {
   historyLog.unshift(entry);
-  if (historyLog.length > 5) historyLog.pop();
+  if (historyLog.length > MAX_HISTORY_ITEMS) historyLog.pop();
   renderHistoryLog();
 }
 

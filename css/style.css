@@ -148,3 +148,22 @@ body {
   outline: 2px solid var(--neon-cyan);
   outline-offset: 2px;
 }
+
+::selection {
+  background: var(--neon-magenta);
+  color: var(--bg);
+}
+
+body {
+  overflow: hidden;
+}
+
+.calc-title {
+  text-align: left;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 6px var(--neon-magenta);
+  margin-bottom: 12px;
+}
