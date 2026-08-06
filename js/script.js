@@ -7,10 +7,10 @@ let operator = null;
 
 function updateDisplay() {
   currentEl.textContent = current;
-  historyEl.textContent = previous && operator ? `${previous} ${operator}` : '';
 }
 
 function inputNumber(num) {
+  if (current.replace('-', '').length >= 12) return;
   if (current === '0' && num !== '.') {
     current = num;
   } else if (num === '.' && current.includes('.')) {
@@ -22,6 +22,11 @@ function inputNumber(num) {
 }
 
 updateDisplay();
+
+/**
+ * Define el operador activo. Si ya hay una operacion pendiente, la resuelve
+ * primero (encadenado). El operador % es una excepcion: actua al instante.
+ */
 
 function chooseOperator(op) {
   if (op === '%') {
@@ -39,6 +44,11 @@ function chooseOperator(op) {
   updateDisplay();
 }
 
+/**
+ * Ejecuta la operacion pendiente usando `previous`, `operator` y `current`.
+ * Redondea el resultado y lo guarda en el historial.
+ */
+
 function calculate() {
   const prev = parseFloat(previous);
   const curr = parseFloat(current);
@@ -49,19 +59,21 @@ function calculate() {
     case '+': result = prev + curr; break;
     case '-': result = prev - curr; break;
     case '*': result = prev * curr; break;
-    case '/':
-      if (curr === 0) {
-        current = 'Error';
-        updateDisplay();
-        setTimeout(clearAll, 1000);
-        return;
-      }
+   case '/':
+  if (curr === 0) {
+    triggerErrorGlitch();
+    return;
+  }
       result = prev / curr;
       break;
     case '%': result = prev % curr; break;
     default: return;
   }
 
+  result = Math.round(result * 100000) / 100000;
+
+  const historyEntry = `${previous} ${operator} ${curr} = ${result}`;
+  saveToHistory(historyEntry);
   current = result.toString();
   operator = null;
   previous = '';
@@ -98,3 +110,42 @@ document.querySelectorAll('.btn').forEach((btn) => {
   });
 });
 
+let historyLog = [];
+
+function saveToHistory(entry) {
+  historyLog.unshift(entry);
+  if (historyLog.length > 5) historyLog.pop();
+  renderHistoryLog();
+}
+
+function renderHistoryLog() {
+  historyEl.innerHTML = historyLog
+    .map((item) => `<div class="history-item">${item}</div>`)
+    .join('');
+}
+
+function triggerErrorGlitch() {
+  current = 'Error';
+  updateDisplay();
+  document.querySelector('.calculator').classList.add('glitch');
+  setTimeout(() => {
+    document.querySelector('.calculator').classList.remove('glitch');
+    clearAll();
+  }, 800);
+}
+
+document.addEventListener('keydown', (e) => {
+  const { key } = e;
+  if (/[0-9.]/.test(key)) {
+    inputNumber(key);
+  } else if (['+', '-', '*', '/'].includes(key)) {
+    chooseOperator(key);
+  } else if (key === 'Enter' || key === '=') {
+    e.preventDefault();
+    calculate();
+  } else if (key === 'Backspace') {
+    deleteLast();
+  } else if (key === 'Escape') {
+    clearAll();
+  }
+});

@@ -40,10 +40,16 @@ body {
 }
 
 .history {
-  min-height: 20px;
-  font-size: 0.9rem;
+  max-height: 90px;
+  overflow-y: auto;
+  font-size: 0.8rem;
   color: var(--neon-cyan);
   opacity: 0.7;
+}
+
+.history-item {
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(0, 255, 249, 0.15);
 }
 
 .current {
@@ -105,4 +111,40 @@ body {
 .btn-clear {
   border-color: var(--error);
   color: var(--error);
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
+  40% { transform: translate(3px, -2px); filter: hue-rotate(-90deg); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+.calculator.glitch {
+  animation: glitch 0.3s linear 2;
+  border-color: var(--error);
+  box-shadow: 0 0 20px var(--error), 0 0 40px rgba(255, 0, 60, 0.4);
+}
+
+@media (max-width: 400px) {
+  .calculator {
+    width: 90vw;
+    padding: 16px;
+  }
+
+  .btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .current {
+    font-size: 1.8rem;
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
 }
