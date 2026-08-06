@@ -157,3 +157,13 @@ body {
 body {
   overflow: hidden;
 }
+
+.calc-title {
+  text-align: right;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 6px var(--neon-magenta);
+  margin-bottom: 12px;
+}
